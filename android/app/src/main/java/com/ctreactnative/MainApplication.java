@@ -51,7 +51,9 @@ public class MainApplication extends Application implements ReactApplication {
     SoLoader.init(this, /* native exopackage */ false);
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
         CleverTapAPI.setNotificationHandler((NotificationHandler)new PushTemplateNotificationHandler());
-    ActivityLifecycleCallback.register(this);   
+    
+        ActivityLifecycleCallback.register(this);   
+        CleverTapAPI.setDebugLevel(CleverTapAPI.LogLevel.DEBUG); // default is CleverTapAPI.LogLevel.INFO
 
       super.onCreate();
   }

@@ -14,6 +14,8 @@ target 'CTReactNative' do
 
   pod 'clevertap-react-native', :path => '../node_modules/clevertap-react-native'
 
+  pod 'RNFirebase', :path => '../node_modules/react-native-firebase'
+
   target 'CTReactNativeTests' do
     inherit! :complete
     # Pods for testing

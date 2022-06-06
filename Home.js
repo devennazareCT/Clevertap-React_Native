@@ -30,7 +30,7 @@ class Greenwood extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      datasource: [], //For storing native display payload
+      datasource: [], //To store native display payload
       title: '--------', //To store native display title
       message: '-------', //To Store Native display message
       uri: 'https://reactnative.dev/img/tiny_logo.png',
@@ -47,7 +47,7 @@ class Greenwood extends React.Component {
       propvals: [],
       proptext: '',
       identity: '00123112',
-      nativekey:''
+      nativekey:''//To store Native Display Unit id
     };
     //...whatever construction you need
   }
@@ -99,7 +99,7 @@ class Greenwood extends React.Component {
   }
 
   getUnitID = () => {
-    CleverTap.getDisplayUnitForId('5799000121', (err, res) => {
+    CleverTap.getDisplayUnitForId(this.state.nativekey, (err, res) => {
       console.log('Get Display Unit for Id:'+res);
       alert(`Get Display Unit for Id: ${res}`);
     });
@@ -111,12 +111,11 @@ class Greenwood extends React.Component {
       console.log(`All Display Units: ${res}`);
       //  alert(`All Display Units: ${res}`);
       this.setState({ datasource: JSON.parse(res) })
-    //  console.log("state is" + JSON.stringify(this.state.datasource.content[0].media.url))
+      this.setState({nativekey: this.state.datasource.wzrk_id}) //Store wzrk_id to use it as Unit_id  
+      this.setState({ message: this.state.datasource.content[0].message.text, title: this.state.datasource.content[0].title.text })
+      console.log("Unit ID is"+this.state.nativekey)
 
-      this.setState({nativekey: JSON.stringify(this.state.datasource.content[0].key)})
-      this.setState({ message: JSON.stringify(this.state.datasource.content[0].message.text), title: JSON.stringify(this.state.datasource.content[0].title.text) })
-      console.log("key is"+this.state.nativekey)
-    //NotificationViewd for Native Display
+    //NotificationViewed for Native Display
     CleverTap.pushDisplayUnitViewedEventForID(this.state.nativekey);
 
     });
@@ -194,16 +193,20 @@ class Greenwood extends React.Component {
           <View style={{ width: 200, paddingTop: 30 }}>
             <Button title='Show Native Display' color={this.state.color} onPress={() => this.getAllDisplayUnits()} />
           </View>  
-          <View style={{ width: 200, paddingTop: 30 }}>
-            <Button title='Show Native Display ID' color={this.state.color} onPress={() => this.getUnitID()} />
+          <View style={{ width: 200, paddingTop: 30,flexDirection:'row' }}>
+            <Button title='Show Unit Display Payload' color={this.state.color} onPress={() => this.getUnitID()} />
+            <Text style={{color:'#000000',fontSize:15,paddingTop:15}}>{this.state.nativekey}</Text>
           </View> 
           <View style={{ width: 300, paddingTop: 30 }}>
             {/* Here render native display values */}
+
+
+
             {/* Push Notification Clicked Event for Native Display */}
             <TouchableOpacity onPress={()=>CleverTap.pushDisplayUnitClickedEventForID(this.state.nativekey)}>
 
-            <Text style={{ fontSize: 20, width: '100%' }}>Native Titleee :- {this.state.title}</Text>
-            <Text style={{ fontSize: 20, width: '100%' }}>Native Message :-{this.state.message}</Text>
+            <Text style={{ fontSize: 15, width: '100%' ,color:'#000000'}}>Native Titleee :- {this.state.title}</Text>
+            <Text style={{ fontSize: 15, width: '100%',color:'#000000' }}>Native Message :-{this.state.message}</Text>
             </TouchableOpacity>
           </View>
           <View style={{ height: 500, width: 400 }}>
@@ -214,14 +217,6 @@ class Greenwood extends React.Component {
               </View>
             </View>
 
-            {/* <FlatList
-            data={this.state.data}
-            renderItem={item => this.renderItemComponent(item)}
-            keyExtractor={item => item.id.toString()}
-            ItemSeparatorComponent={this.ItemSeparator}
-            refreshing={this.state.refreshing}
-            onRefresh={this.handleRefresh}
-          /> */}
           </View>
 
         </ScrollView>
@@ -252,14 +247,3 @@ const styles = StyleSheet.create({
 export default Greenwood;
 
 
-// <View style={{ width: 120, paddingTop: 30, flexDirection: 'row', margin: 10, justifyContent: 'space-between', flex: 1 }}>
-// <View style={{ width: 120 }}>
-//   <Button title='View read' color={this.state.color} onPress={() => this.markRead_InboxMessageForId()} />
-// </View>
-// <View style={{ width: 120, padding: 7 }}>
-//   <Button title='Ab Test' color={this.state.color} onPress={() => this.abtest()} />
-// </View>
-// <View style={{ width: 130 }}>
-//   <Button title='View Unread' color={this.state.color} onPress={() => this.get_All_InboxUnreadMessages()} />
-// </View>
-// </View>

@@ -1,4 +1,47 @@
-# react-nativeCT
+# CleverTap React-Native Integration
 Clevertap Integration with React Native
 
-Check Home.js page for more information regarding how to push events , Inbox Initialization and Native Display callbacks
+## Steps :-
+1) Clone the project and run ``` npm install ```
+2) After installing the node modules run ``` npx react-native run-android ``` .
+
+
+### Check [Home.js](https://github.com/devennazareCT/Clevertap-React_Native/blob/master/Home.js) page for more information regarding how to push events , Inbox Initialization and Native Display callbacks .
+
+To Fetch Native Display Payload - 
+
+``` 
+ CleverTap.getAllDisplayUnits((err, res) => {
+      this.setState({ datasource: JSON.parse(res) })
+      this.setState({nativekey: this.state.datasource.wzrk_id}) //Store wzrk_id to use it as Unit_id  
+      this.setState({ message: this.state.datasource.content[0].message.text, title: this.state.datasource.content[0].title.text })
+      console.log("Unit ID is"+this.state.nativekey)
+      });
+```
+
+To Fetch Native Display Payload using Unit ID  - 
+Pass the wzrk_id as the 'Unit ID' in the below Function 
+```
+  getUnitID = () => {
+    CleverTap.getDisplayUnitForId('Unit ID', (err, res) => {
+      console.log('Get Display Unit for Id:'+res);
+      alert(`Get Display Unit for Id: ${res}`);
+    });
+  };
+```
+
+To push Notification Viewed Event for NativeDisplay 
+Pass the wzrk_id as the Unit ID in the below Function 
+
+```
+CleverTap.pushDisplayUnitViewedEventForID('Unit_id');
+```
+
+To push Notification Clicked Event for NativeDisplay 
+Pass the wzrk_id as the Unit ID in the below Function . Usually used on Touchable Opacity onPress method on Native Display
+```
+CleverTap.pushDisplayUnitClickedEventForID('Unit_id');
+```
+
+## Screenshot 
+![CT ReactNative](https://github.com/devennazareCT/Clevertap-React_Native/blob/master/ss.jpg)

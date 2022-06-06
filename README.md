@@ -30,14 +30,14 @@ Pass the wzrk_id as the 'Unit ID' in the below Function
   };
 ```
 
-To push Notification Viewed Event for NativeDisplay 
+To push Notification Viewed Event for NativeDisplay ,
 Pass the wzrk_id as the Unit ID in the below Function 
 
 ```
 CleverTap.pushDisplayUnitViewedEventForID('Unit_id');
 ```
 
-To push Notification Clicked Event for NativeDisplay 
+To push Notification Clicked Event for NativeDisplay ,
 Pass the wzrk_id as the Unit ID in the below Function . Usually used on Touchable Opacity onPress method on Native Display
 ```
 CleverTap.pushDisplayUnitClickedEventForID('Unit_id');

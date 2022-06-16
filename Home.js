@@ -191,6 +191,9 @@ class Greenwood extends React.Component {
             <Button title='Show AppInbox ' color={this.state.color} onPress={() => this.show_appInbox()} />
           </View>
           <View style={{ width: 200, paddingTop: 30 }}>
+            <Button title='Show Custom App Inbox ' color={this.state.color} onPress={() => this.props.navigation.navigate('AppInbox')} />
+          </View>
+          <View style={{ width: 200, paddingTop: 30 }}>
             <Button title='Show Native Display' color={this.state.color} onPress={() => this.getAllDisplayUnits()} />
           </View>  
           <View style={{ width: 200, paddingTop: 30,flexDirection:'row' }}>

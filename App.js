@@ -8,6 +8,7 @@ import Home from './Home';
 import About from './About';
 import Profile from './Profile';
 import Login from './Login';
+import AppInbox from './AppInbox';
 
 const Stack = createStackNavigator();
 
@@ -45,6 +46,11 @@ function NavStack() {
        name="Login" 
        component={Login} 
        options={{ title: 'Login' }}
+      />
+       <Stack.Screen 
+       name="AppInbox" 
+       component={AppInbox} 
+       options={{ title: 'Inbox Message' }}
       />
     </Stack.Navigator>
   );

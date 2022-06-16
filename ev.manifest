@@ -1,0 +1,23 @@
+{
+    "fileName": "ev.csv",
+    "type": "event",
+    "columns": {
+        "event_name": {
+            "ctName": "evtName",
+                "dataType": "STRING",
+     
+        },
+        "time_stamp": {
+            "ctName": "ts",
+                "dataType": "INTEGER"
+        },
+        "identity": {
+            "ctName": "identity",
+                "dataType": "STRING"
+        },
+       
+    },
+    "clientEmail": "deven@clevertap.com"
+  
+  
+}

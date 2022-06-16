@@ -15,14 +15,15 @@ class Profile extends Component {
   render() {
    // const text =  this.props.navigation.getParam('paramKey', 'nothing sent')
     return (
-      <View style={{ flex: 1,  }}>
-  
-        <Text>Profile screen { this.props.route.params.paramKey}</Text>
+      <View style={{ flex: 1  }}>
+        <Text>Profile screen</Text>
         <WebView
         source={{
-          uri: 'https://infinitival-floor.000webhostapp.com/?identity='+this.props.route.params.paramKey
+          uri: 'https://infinitival-floor.000webhostapp.com/pwa/index.html'
         }}
         style={{ marginTop: 20 }}
+        javaScriptEnabled
+
       />
     
       </View>

@@ -46,8 +46,11 @@ class Greenwood extends React.Component {
       textInput: [],
       propvals: [],
       proptext: '',
-      identity: '00123112',
-      nativekey:''//To store Native Display Unit id
+      identity: '',
+      nativekey:'',//To store Native Display Unit id,
+      name:'',
+      email:'',
+      identity:''
     };
     //...whatever construction you need
   }
@@ -73,6 +76,9 @@ class Greenwood extends React.Component {
     CleverTap.createNotificationChannel("877965", "dev87796", "CT React Native Testing", 1, true); //To create notification channel
     CleverTap.initializeInbox(); //For initializing Appinbox 
 
+    //For Fetching User Properties 
+    CleverTap.enablePersonalization();
+    this.profile_getProperty()
 
   }
   pushInputEvent() {
@@ -84,6 +90,26 @@ class Greenwood extends React.Component {
     alert("event pushed " + this.state.event_name)
     }
   }
+  profile_getProperty = () => {
+
+    CleverTap.profileGetProperty('Email', (err, res) => {
+      this.setState({email:res})
+
+      console.log('CleverTap Identity : ', res, err);
+  });
+  CleverTap.profileGetProperty('Identity', (err, res) => {
+    this.setState({identity:res})
+
+    console.log('CleverTap Identity : ', res, err);
+});
+    //CleverTap Profile Name:
+    CleverTap.profileGetProperty('Name', (err, res) => {
+        console.log('CleverTap Profile Name: ', res, err);
+        this.setState({name:res})
+    });
+    
+
+};
   pushcustomevent(){
     CleverTap.recordEvent("CustomEvent");
     alert("Custom event pushed")
@@ -171,12 +197,18 @@ class Greenwood extends React.Component {
         >
       
           <View style={{ paddingTop: 20 }} >
+            <Text style={{fontSize:20,paddingLeft:20}}>Hello {this.state.name} ,</Text>
+            <Text style={{fontSize:20,paddingLeft:20}}>Your Identity is {this.state.identity} ,</Text>
+            <Text style={{fontSize:20,paddingLeft:20}}>Your Email is {this.state.email} ,</Text>
+
+            <View style={{paddingTop:20,paddingLeft:20}}>
             <TextInput
               placeholder="Enter event name"
-              returnKeyType="done"
-              style={{ borderWidth: 1, width: 350, borderRadius: 20, fontSize: 15 }}
+              returnKeyType="done" placeholderTextColor='#000'
+              style={{ borderWidth: 1, width: 350, borderRadius: 20, fontSize: 15, }}
               onChangeText={(text1) => this.setState({ event_name: text1 })}
             />
+            </View>
           </View>
           <View style={{ width: 200, paddingTop: 30 }}>
             <Button title='Push Above Event ' color={this.state.color} onPress={() => this.pushInputEvent()} />

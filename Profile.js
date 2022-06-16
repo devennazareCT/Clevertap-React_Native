@@ -23,7 +23,6 @@ class Profile extends Component {
         }}
         style={{ marginTop: 20 }}
         javaScriptEnabled
-
       />
     
       </View>

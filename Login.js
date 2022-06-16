@@ -15,14 +15,14 @@ class Login extends Component {
 
       componentDidMount() {
         CleverTap.setDebugLevel(3);
+        CleverTap.enablePersonalization();
 
-          CleverTap.initializeInbox();
       }
 
 
       //function for onuserlogin
       loginpress(){
-        CleverTap.onUserLogin({ 'Name': 'okay', 'Identity': this.state.identity, 'Email': this.state.email, 'Phone': '+916281919001', 'Gender': 'M','birthdate': new Date('2020-03-03T06:35:31'), 'MSG-push': true ,'MSG-email' : true,
+        CleverTap.onUserLogin({ 'Name': 'Joe', 'Identity': this.state.identity, 'Email': this.state.email, 'Phone': '+916281919001', 'Gender': 'M','birthdate': new Date('2020-03-03T06:35:31'), 'MSG-push': true ,'MSG-email' : true,
         'MSG-sms' : true,
         'MSG-whatsapp' : true})
       

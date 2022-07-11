@@ -42,7 +42,7 @@ Declare the handleCleverTapInbox method outside the ComponentdidMount as below
   }
 
 ```
-## Screenshot for the above Callback
+### Screenshot for the above Callback
 
 ![App Inbox Button Callback](https://github.com/devennazareCT/Clevertap-React_Native/blob/master/AppInboxButtonCallback.png)
 

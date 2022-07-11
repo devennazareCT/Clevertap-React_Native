@@ -9,6 +9,40 @@ Clevertap Integration with React Native
 
 ### Check [Home.js](https://github.com/devennazareCT/Clevertap-React_Native/blob/master/Home.js) page for more information regarding how to push events , Inbox Initialization and Native Display callbacks .
 
+To Fetch App Inbox button Callback 
+Click on the Push Custom Event Button on Home Page to recieve the Campaign Message.
+Click on Show App Inbox button to view the Inbox Message . 
+Once you click on the App inbox button you can get the app inbox button callback by using below code 
+
+Add below code in componentdidMount()
+```
+
+  componentDidMount() {
+    CleverTap.setDebugLevel(3);
+
+    CleverTap.addListener(CleverTap.CleverTapInboxMessageButtonTapped, (event) => {
+      console.log("insidelistner")
+
+      this.handleCleverTapInbox(CleverTap.CleverTapInboxMessageButtonTapped, event);
+      console.log("endoflistener")
+    });
+  }
+
+```
+Declare the handleCleverTapInbox method outside the ComponentdidMount as below
+
+```
+ handleCleverTapInbox(eventName, event) {
+    console.log('handleCleverTapInbox', eventName, event);
+    console.log("eventname is" + eventName);
+
+    //Fetch the app inbox button kv here 
+    console.log("APP INbox EVENT KV IS- ", JSON.stringify(event))
+
+  }
+
+```
+
 To Fetch Native Display Payload - 
 
 ``` 

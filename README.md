@@ -42,6 +42,9 @@ Declare the handleCleverTapInbox method outside the ComponentdidMount as below
   }
 
 ```
+## Screenshot for the above Callback
+
+![App Inbox Button Callback](https://github.com/devennazareCT/Clevertap-React_Native/blob/master/AppInboxButtonCallback.png)
 
 To Fetch Native Display Payload - 
 
@@ -64,7 +67,6 @@ Pass the wzrk_id as the 'Unit ID' in the below Function
     });
   };
 ```
-
 To push Notification Viewed Event for NativeDisplay ,
 Pass the wzrk_id as the Unit ID in the below Function 
 

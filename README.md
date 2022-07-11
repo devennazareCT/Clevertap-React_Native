@@ -4,6 +4,7 @@ Clevertap Integration with React Native
 ## Steps :-
 1) Clone the project and run ``` npm install ```
 2) After installing the node modules run ``` npx react-native run-android ``` .
+3) To Receive App Inbox kindy click the Push Custom Event Button on the (Home)Home.js Page.
 
 
 ### Check [Home.js](https://github.com/devennazareCT/Clevertap-React_Native/blob/master/Home.js) page for more information regarding how to push events , Inbox Initialization and Native Display callbacks .

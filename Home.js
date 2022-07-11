@@ -47,10 +47,10 @@ class Greenwood extends React.Component {
       propvals: [],
       proptext: '',
       identity: '',
-      nativekey:'',//To store Native Display Unit id,
-      name:'',
-      email:'',
-      identity:''
+      nativekey: '',//To store Native Display Unit id,
+      name: '',
+      email: '',
+      identity: ''
     };
     //...whatever construction you need
   }
@@ -66,67 +66,88 @@ class Greenwood extends React.Component {
     this.setState({ textInput })
 
   }
-
-
-
   componentDidMount() {
     CleverTap.setDebugLevel(3);
-    // CleverTap.setPushToken("fcm:ch9ejVWUSgylcmiWau9OHZ:APA91bHgeEy5pMAK-9-lNzg8UK_5jBwmgQryTsS-pKfBLQX5SKJADd_cFsFZl4r-wgEDVdMOwIW6S6lMWz41ptSt8a3Z32nV0L8zDaYZrmDcXGzsYJMUR1P1lVkVXpa7Em-TYJfVfh_p", CleverTap.FCM);
-    
-    CleverTap.createNotificationChannel("877965", "dev87796", "CT React Native Testing", 1, true); //To create notification channel
+
+    CleverTap.createNotificationChannel("111", "111", "CT React Native Testing", 1, true); //To create notification channel
     CleverTap.initializeInbox(); //For initializing Appinbox 
 
     //For Fetching User Properties 
     CleverTap.enablePersonalization();
-    this.profile_getProperty()
+    this.profile_getProperty();
+
+    //handling callback for Appinbox buttons
+    CleverTap.addListener(CleverTap.CleverTapInboxMessageButtonTapped, (event) => {
+      console.log("insidelistner")
+
+      //call the handle clevertapappinbox method here 
+      this.handleCleverTapInbox(CleverTap.CleverTapInboxMessageButtonTapped, event);
+      console.log("endoflistener")
+    });
+  }
+
+
+  //Declare the handle clevertapappinbox method 
+  handleCleverTapInbox(eventName, event) {
+    console.log('handleCleverTapInbox', eventName, event);
+    console.log("eventname is" + eventName);
+
+    //Fetch the app inbox button kv here 
+    console.log("APP INbox EVENT KV IS- ", JSON.stringify(event))
 
   }
+
+
+
+
+
+
+
+
   pushInputEvent() {
-    if(this.state.event_name==""){
+    if (this.state.event_name == "") {
       alert("Enter Event Name Above")
     }
-    else{
-    CleverTap.recordEvent(this.state.event_name);
-    alert("event pushed " + this.state.event_name)
+    else {
+      CleverTap.recordEvent(this.state.event_name);
+      alert("event pushed " + this.state.event_name)
     }
   }
   profile_getProperty = () => {
 
     CleverTap.profileGetProperty('Email', (err, res) => {
-      this.setState({email:res})
+      this.setState({ email: res })
 
       console.log('CleverTap Identity : ', res, err);
-  });
-  CleverTap.profileGetProperty('Identity', (err, res) => {
-    this.setState({identity:res})
+    });
+    CleverTap.profileGetProperty('Identity', (err, res) => {
+      this.setState({ identity: res })
 
-    console.log('CleverTap Identity : ', res, err);
-});
+      console.log('CleverTap Identity : ', res, err);
+    });
     //CleverTap Profile Name:
     CleverTap.profileGetProperty('Name', (err, res) => {
-        console.log('CleverTap Profile Name: ', res, err);
-        this.setState({name:res})
+      console.log('CleverTap Profile Name: ', res, err);
+      this.setState({ name: res })
     });
-    
 
-};
-  pushcustomevent(){
+
+  };
+  pushcustomevent() {
     CleverTap.recordEvent("CustomEvent");
-    alert("Custom event pushed")
-    //event with properties
-    // CleverTap.recordEvent("testEventWithProps", { "start":"now", "foo": "bar"})
+
   }
-  chargedEvent(){
-     CleverTap.recordChargedEvent({ 'totalValue': 20, 'category': 'books', 'purchase_date': new Date() },
-    [{ 'title': 'book1', 'published_date': new Date('2010-12-12T06:35:31'), 'author': 'ABC' },
-    { 'title': 'book2', 'published_date': new Date('2000-12-12T06:35:31') },
-    { 'title': 'book3', 'published_date': new Date(), 'author': 'XYZ' }]);
+  chargedEvent() {
+    CleverTap.recordChargedEvent({ 'totalValue': 20, 'category': 'books', 'purchase_date': new Date() },
+      [{ 'title': 'book1', 'published_date': new Date('2010-12-12T06:35:31'), 'author': 'ABC' },
+      { 'title': 'book2', 'published_date': new Date('2000-12-12T06:35:31') },
+      { 'title': 'book3', 'published_date': new Date(), 'author': 'XYZ' }]);
     alert("Charged Event Pushed")
   }
 
   getUnitID = () => {
     CleverTap.getDisplayUnitForId(this.state.nativekey, (err, res) => {
-      console.log('Get Display Unit for Id:'+res);
+      console.log('Get Display Unit for Id:' + res);
       alert(`Get Display Unit for Id: ${res}`);
     });
   };
@@ -137,15 +158,15 @@ class Greenwood extends React.Component {
       console.log(`All Display Units: ${res}`);
       //  alert(`All Display Units: ${res}`);
       this.setState({ datasource: JSON.parse(res) })
-      this.setState({nativekey: this.state.datasource.wzrk_id}) //Store wzrk_id to use it as Unit_id  
+      this.setState({ nativekey: this.state.datasource.wzrk_id }) //Store wzrk_id to use it as Unit_id  
       this.setState({ message: this.state.datasource.content[0].message.text, title: this.state.datasource.content[0].title.text })
-      console.log("Unit ID is"+this.state.nativekey)
+      console.log("Unit ID is" + this.state.nativekey)
 
-    //NotificationViewed for Native Display
-    CleverTap.pushDisplayUnitViewedEventForID(this.state.nativekey);
+      //NotificationViewed for Native Display
+      CleverTap.pushDisplayUnitViewedEventForID(this.state.nativekey);
 
     });
-    
+
   };
 
   show_appInbox = () => {
@@ -166,9 +187,10 @@ class Greenwood extends React.Component {
   };
 
   pushProduct() {
-    CleverTap.recordEvent('ProductLiked', { 'Name': 'iPhone12', 'price': '80,000', 'color': 'Jet Black', 'sku': 'IP1202' });
-    alert("Product Pushed ")
+    CleverTap.recordEvent('ProductLiked', { 'Name': 'iPhone12', 'price': 80000, 'color': 'Jet Black', 'sku': 'IP1202' });
+    alert("Product Liked ")
   }
+
 
   renderItemComponent = (data) =>
     <TouchableOpacity style={styles.container} onPress={() => alert(JSON.stringify(this.state.inbox.msg.content[0].message.text))} >
@@ -189,25 +211,25 @@ class Greenwood extends React.Component {
   }}
   />
 
- 
+
   render() {
     return (
-      <View>
+      <View style={{ backgroundColor: '#fff' }}>
         <ScrollView
         >
-      
-          <View style={{ paddingTop: 20 }} >
-            <Text style={{fontSize:20,paddingLeft:20}}>Hello {this.state.name} ,</Text>
-            <Text style={{fontSize:20,paddingLeft:20}}>Your Identity is {this.state.identity} ,</Text>
-            <Text style={{fontSize:20,paddingLeft:20}}>Your Email is {this.state.email} ,</Text>
 
-            <View style={{paddingTop:20,paddingLeft:20}}>
-            <TextInput
-              placeholder="Enter event name"
-              returnKeyType="done" placeholderTextColor='#000'
-              style={{ borderWidth: 1, width: 350, borderRadius: 20, fontSize: 15, }}
-              onChangeText={(text1) => this.setState({ event_name: text1 })}
-            />
+          <View style={{ paddingTop: 20 }} >
+            <Text style={{ fontSize: 20, paddingLeft: 20 }}>Hello {this.state.name} ,</Text>
+            <Text style={{ fontSize: 20, paddingLeft: 20 }}>Your Identity is {this.state.identity} ,</Text>
+            <Text style={{ fontSize: 20, paddingLeft: 20 }}>Your Email is {this.state.email} ,</Text>
+
+            <View style={{ paddingTop: 20, paddingLeft: 20 }}>
+              <TextInput
+                placeholder="Enter event name"
+                returnKeyType="done" placeholderTextColor='#000'
+                style={{ borderWidth: 1, width: 350, borderRadius: 20, fontSize: 15, }}
+                onChangeText={(text1) => this.setState({ event_name: text1 })}
+              />
             </View>
           </View>
           <View style={{ width: 200, paddingTop: 30 }}>
@@ -215,37 +237,40 @@ class Greenwood extends React.Component {
           </View>
           <View style={{ width: 200, paddingTop: 30 }}>
             <Button title='Push Custom Event ' color={this.state.color} onPress={() => this.pushcustomevent()} />
-          </View>  
+          </View>
+          <View style={{ width: 200, paddingTop: 30 }}>
+            <Button title='Push Product Liked  ' color={this.state.color} onPress={() => this.pushProduct()} />
+          </View>
           <View style={{ width: 200, paddingTop: 30 }}>
             <Button title='Push Charged Event ' color={this.state.color} onPress={() => this.chargedEvent()} />
-          </View>  
+          </View>
           <View style={{ width: 200, paddingTop: 30 }}>
             <Button title='Show AppInbox ' color={this.state.color} onPress={() => this.show_appInbox()} />
           </View>
-          <View style={{ width: 200, paddingTop: 30 }}>
+          {/* <View style={{ width: 200, paddingTop: 30 }}>
             <Button title='Show Custom App Inbox ' color={this.state.color} onPress={() => this.props.navigation.navigate('AppInbox')} />
-          </View>
+          </View> */}
           <View style={{ width: 200, paddingTop: 30 }}>
             <Button title='Show Native Display' color={this.state.color} onPress={() => this.getAllDisplayUnits()} />
-          </View>  
-          <View style={{ width: 200, paddingTop: 30,flexDirection:'row' }}>
+          </View>
+          <View style={{ width: 200, paddingTop: 30, flexDirection: 'row' }}>
             <Button title='Show Unit Display Payload' color={this.state.color} onPress={() => this.getUnitID()} />
-            <Text style={{color:'#000000',fontSize:15,paddingTop:15}}>{this.state.nativekey}</Text>
-          </View> 
+            <Text style={{ color: '#000000', fontSize: 15, paddingTop: 15 }}>{this.state.nativekey}</Text>
+          </View>
           <View style={{ width: 300, paddingTop: 30 }}>
             {/* Here render native display values */}
 
 
 
             {/* Push Notification Clicked Event for Native Display */}
-            <TouchableOpacity onPress={()=>CleverTap.pushDisplayUnitClickedEventForID(this.state.nativekey)}>
+            <TouchableOpacity onPress={() => CleverTap.pushDisplayUnitClickedEventForID(this.state.nativekey)}>
 
-            <Text style={{ fontSize: 15, width: '100%' ,color:'#000000'}}>Native Titleee :- {this.state.title}</Text>
-            <Text style={{ fontSize: 15, width: '100%',color:'#000000' }}>Native Message :-{this.state.message}</Text>
+              <Text style={{ fontSize: 15, width: '100%', color: '#000000' }}>Native Titleee :- {this.state.title}</Text>
+              <Text style={{ fontSize: 15, width: '100%', color: '#000000' }}>Native Message :-{this.state.message}</Text>
             </TouchableOpacity>
           </View>
           <View style={{ height: 500, width: 400 }}>
-           
+
             <View style={{ paddingTop: 20 }}>
               <View style={{ paddingTop: 30 }}>
                 <Button title='Go to Webview' color={this.state.color} onPress={() => this.props.navigation.navigate('Profile')} />

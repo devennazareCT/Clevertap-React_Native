@@ -16,7 +16,7 @@ class Profile extends Component {
    // const text =  this.props.navigation.getParam('paramKey', 'nothing sent')
     return (
       <View style={{ flex: 1  }}>
-        <Text>Profile screen</Text>
+        <Text>Webview screen</Text>
         <WebView
         source={{
           uri: 'https://infinitival-floor.000webhostapp.com/pwa/index.html'

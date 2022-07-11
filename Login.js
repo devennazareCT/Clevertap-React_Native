@@ -8,7 +8,8 @@ class Login extends Component {
         super(props)
         this.state = {
             email:'',
-            identity:''
+            identity:'',
+            name:''
         };
         //...whatever construction you need
       }
@@ -22,7 +23,7 @@ class Login extends Component {
 
       //function for onuserlogin
       loginpress(){
-        CleverTap.onUserLogin({ 'Name': 'Joe', 'Identity': this.state.identity, 'Email': this.state.email, 'Phone': '+916281919001', 'Gender': 'M','birthdate': new Date('2020-03-03T06:35:31'), 'MSG-push': true ,'MSG-email' : true,
+        CleverTap.onUserLogin({ 'Name': this.state.name, 'Identity': this.state.identity, 'Email': this.state.email, 'Phone': '+916281919001', 'Gender': 'M','birthdate': new Date('2020-03-03T06:35:31'), 'MSG-push': true ,'MSG-email' : true,
         'MSG-sms' : true,
         'MSG-whatsapp' : true})
       
@@ -31,7 +32,17 @@ class Login extends Component {
     }
   render() {
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' ,backgroundColor:'#fff'}}>
+         <View style={{paddingTop:20}} >
+      <TextInput
+        placeholder="Name"
+        returnKeyType="done"
+        style={{borderWidth:1,width:250,borderRadius:20,fontSize:15}}
+        onChangeText={(text2) =>this.setState({name:text2})}
+      />
+      </View>
+      <View style={{paddingTop:20}} >
+
         <TextInput
         placeholder="Email"
         returnKeyType="next"
@@ -39,6 +50,7 @@ class Login extends Component {
         onChangeText={(text) =>this.setState({email:text})}
        
       />
+      </View>
       <View style={{paddingTop:20}} >
       <TextInput
         placeholder="Identity"

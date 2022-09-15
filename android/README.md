@@ -66,17 +66,3 @@ Initializing the Geofence objects and settings
 
 
 ```
-### Screenshot for the above Callback
-
-![App Inbox Button Callback](https://github.com/devennazareCT/Clevertap-React_Native/blob/master/AppInboxButtonCallback.png)
-
-To Fetch Native Display Payload - 
-
-``` 
- CleverTap.getAllDisplayUnits((err, res) => {
-      this.setState({ datasource: JSON.parse(res) })
-      this.setState({nativekey: this.state.datasource.wzrk_id}) //Store wzrk_id to use it as Unit_id  
-      this.setState({ message: this.state.datasource.content[0].message.text, title: this.state.datasource.content[0].title.text })
-      console.log("Unit ID is"+this.state.nativekey)
-      });
-```

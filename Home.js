@@ -265,15 +265,15 @@ class Greenwood extends React.Component {
           <View style={{ width: 200, paddingTop: 30 }}>
             <Button title='Show AppInbox ' color={this.state.color} onPress={() => this.show_appInbox()} />
           </View>
-          {/* <View style={{ width: 200, paddingTop: 30 }}>
+          <View style={{ width: 200, paddingTop: 30 }}>
             <Button title='Show Custom App Inbox ' color={this.state.color} onPress={() => this.props.navigation.navigate('AppInbox')} />
-          </View> */}
+          </View>
           <View style={{ width: 200, paddingTop: 30 }}>
             <Button title='Show Native Display' color={this.state.color} onPress={() => this.getAllDisplayUnits()} />
           </View>
           <View style={{ width: 200, paddingTop: 30, flexDirection: 'row' }}>
             <Button title='Show Unit Display Payload' color={this.state.color} onPress={() => this.getUnitID()} />
-            <Text style={{ color: '#000000', fontSize: 15, paddingTop: 15 }}>{this.state.nativekey}</Text>
+            <Text style={{ color: '#000000', fontSize: 15, paddingTop: 15,width:200 }}>{this.state.nativekey}</Text>
           </View>
           <View style={{ width: 300, paddingTop: 30 }}>
             {/* Here render native display values */}

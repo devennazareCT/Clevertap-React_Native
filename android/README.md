@@ -66,3 +66,4 @@ Initializing the Geofence objects and settings
 
 
 ```
+### Please refer to  [Settings Page](https://github.com/devennazareCT/Clevertap-React_Native/blob/master/android/settings.md) page for more information regarding the above settings 

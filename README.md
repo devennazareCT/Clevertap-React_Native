@@ -1,6 +1,10 @@
 # CleverTap React-Native Integration
 Clevertap Integration with React Native
 
+
+### CleverTap Geo-Fencing implementation (Android)
+Check [Android Folder](https://github.com/devennazareCT/Clevertap-React_Native/tree/master/android) page for more information regarding implementation of Geo-Fencing in Android  .
+
 ## Steps :-
 1) Clone the project and run ``` npm install ```
 2) After installing the node modules run ``` npx react-native run-android ``` .
